@@ -14,7 +14,7 @@ const App: React.FC = () => {
                 <AppNavbar />
 
                 {/* Main Content */}
-                <div className="mt-5 pt-4">
+                <div className="mt-5 pt-5">
                     <Routes>
                         <Route path="/" element={<HomePage />} />
                         <Route path="/roomlistpage" element={<RoomListPage />} />
