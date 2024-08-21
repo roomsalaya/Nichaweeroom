@@ -25,6 +25,5 @@ dist-ssr
 
 
 git add .
-git commit “First time to commit”
-git push origin/main
-npm run deploy
+git push -u origin --all
+git push 
