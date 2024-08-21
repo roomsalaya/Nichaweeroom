@@ -15,7 +15,7 @@ const Login: React.FC = () => {
         e.preventDefault();
         try {
             await signInWithEmailAndPassword(auth, email, password);
-            navigate('/'); // Navigate to the homepage or any protected page
+            navigate('/home'); // Navigate to the homepage or any protected page
         } catch (error: any) {
             setError(error.message);
         }
