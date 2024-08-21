@@ -25,5 +25,5 @@ dist-ssr
 
 
 git add .
-git push -u origin --all
-git push 
+git commit -m "Initial commit"
+git push -u origin master
