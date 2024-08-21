@@ -1,19 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import { Navbar as BootstrapNavbar, Container, Dropdown } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { auth } from '../firebaseConfig'; // Import the Firebase auth
+import { auth, db } from '../firebaseConfig'; // Import the Firebase auth and Firestore
 import { onAuthStateChanged, signOut, User } from 'firebase/auth'; // Import auth functions
 import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
+import { doc, getDoc } from 'firebase/firestore'; // Import Firestore functions
 import './AppNavbar.css';
 
 const AppNavbar: React.FC = () => {
     const [user, setUser] = useState<User | null>(null);
+    const [profilePicture, setProfilePicture] = useState<string>(''); // State for profile picture
     const navigate = useNavigate(); // Initialize the navigate function
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+        const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
             setUser(currentUser);
-            if (!currentUser) {
+            if (currentUser) {
+                try {
+                    const userDoc = await getDoc(doc(db, 'users', currentUser.email || ''));
+                    if (userDoc.exists()) {
+                        const data = userDoc.data();
+                        setProfilePicture(data.profilePicture || 'https://via.placeholder.com/40'); // Default placeholder
+                    }
+                } catch (error) {
+                    console.error('Error fetching user data: ', error);
+                }
+            } else {
                 navigate('/login'); // Redirect to login if not authenticated
             }
         });
@@ -41,7 +53,7 @@ const AppNavbar: React.FC = () => {
                         <Dropdown align="end"> {/* Align dropdown to the end (right) */}
                             <Dropdown.Toggle variant="link" id="user-avatar-dropdown">
                                 <img
-                                    src={user.photoURL || 'https://via.placeholder.com/40'}
+                                    src={profilePicture}
                                     alt="User Avatar"
                                     className="rounded-circle"
                                     style={{ width: '40px', height: '40px' }}
@@ -49,13 +61,13 @@ const AppNavbar: React.FC = () => {
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu>
-                                <Dropdown.Item href="#">Profile</Dropdown.Item>
-                                <Dropdown.Item href="#">บิลค่าเช่า</Dropdown.Item>
+                                <Dropdown.Item href="/profilepage">บัญชี</Dropdown.Item>
+                                <Dropdown.Item href="/rentalinvoiceaccordion">บิลค่าเช่า</Dropdown.Item>
                                 <Dropdown.Item href="#">แจ้งชำระเงิน</Dropdown.Item>
                                 <Dropdown.Item href="#">แจ้งซ่อม</Dropdown.Item>
                                 <Dropdown.Item href="#">กระดานข่าว</Dropdown.Item>
                                 <Dropdown.Item href="#">วิเคราะรายจ่าย</Dropdown.Item>
-                                <Dropdown.Item href="#">Settings</Dropdown.Item>
+                                <Dropdown.Item href="/profilesettingpage">ตั้งค่าบัญชี</Dropdown.Item>
                                 <Dropdown.Divider />
                                 <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
                             </Dropdown.Menu>

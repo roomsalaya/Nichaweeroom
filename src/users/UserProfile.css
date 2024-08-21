@@ -1,0 +1,71 @@
+.profile-container {
+    align-items: center;
+    background-color: #333;
+    font-family: "Anuphan", sans-serif;
+}
+
+.profilecontainer {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    max-width: 600px;
+    margin: 20px auto;
+    font-family: "Anuphan", sans-serif;
+}
+
+.information {
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+.information p{
+    font-family: "Anuphan", sans-serif;
+    font-weight: 700;
+}
+
+.table{
+    margin-bottom: 10px;
+    font-family: "Anuphan", sans-serif;
+}
+
+.profile-picture {
+    border-radius: 50%;
+    width: 80px;
+    /* Adjust size as needed */
+    height: 80px;
+    /* Maintain aspect ratio */
+    object-fit: cover;
+    /* Ensure the image covers the circle without distortion */
+    margin-right: 20px;
+    /* Space between image and text */
+    border: 2px solid #ddd;
+    /* Border around the profile picture */
+}
+
+.profile-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: "Anuphan", sans-serif;
+}
+
+.profile-details p {
+    font-size: 16px;
+    /* Adjust font size as needed */
+    margin: 5px 0;
+    color: #333;
+    font-family: "Anuphan", sans-serif;
+}
+
+.profile-details p:first-child {
+    font-weight: bold;
+    font-family: "Anuphan", sans-serif;
+}

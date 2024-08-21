@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { auth } from '../firebaseConfig'; // Import the Firebase auth
+import { auth } from '../firebaseConfig'; 
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './Login.css'; // Import your CSS file
 
 const Login: React.FC = () => {
     const [email, setEmail] = useState('');
@@ -21,7 +22,7 @@ const Login: React.FC = () => {
     };
 
     return (
-        <div className="container mt-5">
+        <div className="login-container mt-5">
             <h2>Login</h2>
             <form onSubmit={handleLogin}>
                 <div className="mb-3">
