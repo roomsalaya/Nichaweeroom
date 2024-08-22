@@ -30,3 +30,10 @@
     cursor: pointer;
     text-align: center;
 }
+
+.table .modal-body {
+    position: relative;
+    flex: 1 1 auto;
+    padding: var(--bs-modal-padding);
+    overflow-y: auto;
+}
