@@ -7,7 +7,9 @@ import UserProfile from './users/UserProfile';
 import ProfileSettingsPage from './users/ProfileSettingsPage';
 import RoomSettings from './AdminSettingsRoom/RoomSettings';
 import RentalInvoiceAccordion from './users/RentalInvoiceAccordion';
-import ElectricityRate from './component/ElectricityRate';
+import ElectricityRate from './AdminSettingsRoom/ElectricityRate';
+import Showelectricity from './AdminSettingsRoom/Showelectricity';
+import InvoicePage from './AdminSettingsRoom/InvoicePage';
 
 const App: React.FC = () => {
     // ตัวอย่างค่าที่ใช้เป็น props
@@ -38,7 +40,9 @@ const App: React.FC = () => {
                             }
                         />
                         <Route path='/electricityrate' element={<ElectricityRate/>} />
+                        <Route path='/showelectricity' element={<Showelectricity/>} />
                         <Route path="/rentalinvoiceaccordion" element={<RentalInvoiceAccordion />} />
+                        <Route path='/invoiceoage' element={<InvoicePage/>} />
                     </Routes>
                 </div>
             </div>

@@ -1,0 +1,32 @@
+.invoicepage-container{
+    text-align: center;
+    font-family: "Anuphan", sans-serif;
+}
+
+.invoicepage{
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    max-width: 1000px;
+    margin: 20px auto;
+}
+
+.anticon svg {
+    display: inline-block;
+    font-size: 50px;
+}
+
+.container .btn {
+    width: 120px;
+    height: 120px;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: bold;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+}
