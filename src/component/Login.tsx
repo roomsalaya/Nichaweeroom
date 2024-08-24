@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { auth } from '../firebaseConfig'; 
+import { auth } from '../firebaseConfig';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './Login.css'; // Import your CSS file
+import './Login.css';
 
 const Login: React.FC = () => {
     const [email, setEmail] = useState('');
@@ -14,8 +14,15 @@ const Login: React.FC = () => {
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            await signInWithEmailAndPassword(auth, email, password);
-            navigate('/home'); // Navigate to the homepage or any protected page
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
+            
+            // Redirect based on email
+            if (user.email === '201@room.com') {
+                navigate('/userprofile201'); // Redirect for specific email
+            } else {
+                navigate('/userprofile201'); // Default redirection for other users
+            }
         } catch (error: any) {
             setError(error.message);
         }

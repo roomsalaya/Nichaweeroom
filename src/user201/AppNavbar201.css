@@ -1,0 +1,44 @@
+.navbar-custom {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand{
+    font-family: "Anuphan", sans-serif;
+    font-weight: 700;
+}
+
+.user-avatar {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.user-avatar img {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border: 2px solid #007bff;
+}
+
+#user-avatar-dropdown .dropdown-toggle::after {
+    display: none;
+}
+
+#user-avatar-dropdown .dropdown-menu {
+    right: 0;
+    left: auto;
+    border-radius: 0.25rem;
+}
+
+.dropdown-menu .dropdown-item {
+    padding: 0.5rem 1.5rem;
+    font-family: "Anuphan", sans-serif;
+    font-weight: 500;
+}
+
+.dropdown-menu .dropdown-divider {
+    margin: 0.5rem 0;
+}

@@ -37,3 +37,90 @@
     padding: var(--bs-modal-padding);
     overflow-y: auto;
 }
+
+.dropdown {
+    display: flex;
+    gap: 10px;
+}
+
+.form-select {
+    width: 200px;
+}
+
+.dropdown {
+    margin-top: 10px;
+}
+
+.form-select {
+    margin-right: 10px;
+    width: auto;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+.invoice-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.invoice-table th, .invoice-table td {
+    padding: 10px;
+    border: 1px solid #dee2e6;
+    text-align: left;
+}
+
+.invoice-header {
+    background-color: #e9ecef;
+    font-weight: bold;
+}
+
+.invoice-amount {
+    text-align: right;
+}
+
+.invoice-cell {
+    vertical-align: middle;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+h4 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+h5 {
+    margin: 0;
+}
+
+.modal-dialog {
+    max-width: 80%;
+}
+
+.modal-title {
+    font-size: 1.25rem;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-secondary, .btn-primary {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}

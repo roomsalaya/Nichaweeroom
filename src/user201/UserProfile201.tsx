@@ -2,31 +2,31 @@ import React, { useEffect, useState } from 'react';
 import { doc, getDoc } from 'firebase/firestore';
 import { auth, db } from '../firebaseConfig';
 import { onAuthStateChanged } from 'firebase/auth';
-import './UserProfile.css';
-import AppNavbar from '../component/AppNavbar';
+import './UserProfile201.css'; // Ensure to create this CSS file
+import AppNavbar201 from './AppNavbar201';
 
-const UserProfile: React.FC = () => {
+const UserProfile201: React.FC = () => {
     const [profilePicture, setProfilePicture] = useState<string>('');
     const [fullName, setFullName] = useState<string>('');
-    const [phoneNumber, setPhoneNumber] = useState<string>(''); // Add phone number state
+    const [phoneNumber, setPhoneNumber] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string>('');
     const [rentalAgreement, setRentalAgreement] = useState<string>('');
-    const [rentAmount, setRentAmount] = useState<number>(3200); // Default rent amount
-    const [electricityRate, setElectricityRate] = useState<number>(9); // Default rate: 9 THB per unit
-    const [waterRate, setWaterRate] = useState<number>(100); // Default rate: 100 THB per month
+    const [rentAmount, setRentAmount] = useState<number>(3200);
+    const [electricityRate, setElectricityRate] = useState<number>(9);
+    const [waterRate, setWaterRate] = useState<number>(100);
 
     useEffect(() => {
         const fetchUserData = async () => {
             onAuthStateChanged(auth, async (user) => {
                 if (user) {
                     try {
-                        const userDoc = await getDoc(doc(db, 'users', user.email || ''));
+                        const userDoc = await getDoc(doc(db, 'users201', user.email || ''));
                         if (userDoc.exists()) {
                             const data = userDoc.data();
                             setProfilePicture(data.profilePicture || '');
                             setFullName(data.fullName || '');
-                            setPhoneNumber(data.phoneNumber || ''); // Fetch phone number
+                            setPhoneNumber(data.phoneNumber || '');
                             setRentalAgreement(data.rentalAgreement || 'ไม่พบข้อมูลสัญญาเช่า');
                             setRentAmount(data.rentAmount || 3200);
                             setElectricityRate(data.electricityRate || 9);
@@ -59,14 +59,14 @@ const UserProfile: React.FC = () => {
 
     return (
         <>
-            <AppNavbar />
+            <AppNavbar201 />
             <div>
                 <div className="profilecontainer">
                     <img src={profilePicture} alt="Profile" className="profile-picture" />
                     <div className="profile-details">
                         <p>ห้องพัก : 201</p>
                         <p>ชื่อ นามสกุล : {fullName}</p>
-                        <p>เบอร์โทร : {phoneNumber}</p> {/* Displaying the phone number */}
+                        <p>เบอร์โทร : {phoneNumber}</p>
                     </div>
                 </div>
                 <div className='information'>
@@ -97,4 +97,4 @@ const UserProfile: React.FC = () => {
     );
 };
 
-export default UserProfile;
+export default UserProfile201;

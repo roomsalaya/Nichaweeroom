@@ -2,12 +2,10 @@ import React from "react";
 import "./HomePage.css";
 import img1 from "../assets/img/แจ้งซ่อมแซมตามจุดต่าง ๆ.png"; // Adjust path if needed
 import img2 from "../assets/img/แจ้งรับพัสดุ.png";
-import AppNavbar from "./AppNavbar";
 
 const HomePage: React.FC = () => {
     return (
         <>
-        <AppNavbar/>
             <div className="home-center">
                 <div className="homepage-container">
                     <header className="homepage-header">

@@ -3,14 +3,14 @@ import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { db, auth, storage } from '../firebaseConfig';
 import { onAuthStateChanged } from 'firebase/auth';
-import './ProfileSettingsPage.css';
-import AppNavbar from '../component/AppNavbar';
+import './ProfileSettingsPage201.css';
+import AppNavbar201 from './AppNavbar201';
 
-const ProfileSettingsPage: React.FC = () => {
+const ProfileSettingsPage201: React.FC = () => {
     const [profilePicture, setProfilePicture] = useState<string>('');
-    const [roomNumber, setRoomNumber] = useState<string>('');
+    const [roomNumber, setRoomNumber] = useState<string>('201');
     const [fullName, setFullName] = useState<string>('');
-    const [phoneNumber, setPhoneNumber] = useState<string>(''); // Add phone number state
+    const [phoneNumber, setPhoneNumber] = useState<string>('');
     const [file, setFile] = useState<File | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string>('');
@@ -20,13 +20,14 @@ const ProfileSettingsPage: React.FC = () => {
             onAuthStateChanged(auth, async (user) => {
                 if (user) {
                     try {
-                        const userDoc = await getDoc(doc(db, 'users', user.email || ''));
+                        // Fetch data from the specific document for room 201
+                        const userDoc = await getDoc(doc(db, 'users201', user.email || ''));
                         if (userDoc.exists()) {
                             const data = userDoc.data();
                             setProfilePicture(data.profilePicture || '');
-                            setRoomNumber(data.roomNumber || '');
+                            setRoomNumber(data.roomNumber || '201');
                             setFullName(data.fullName || '');
-                            setPhoneNumber(data.phoneNumber || ''); // Fetch phone number
+                            setPhoneNumber(data.phoneNumber || '');
                         }
                     } catch (error) {
                         setError('Failed to fetch user data.');
@@ -55,16 +56,17 @@ const ProfileSettingsPage: React.FC = () => {
                 let profilePicUrl = profilePicture;
 
                 if (file) {
-                    const storageRef = ref(storage, `profile_pictures/${user.uid}/${file.name}`);
+                    const storageRef = ref(storage, `profile_pictures_201/${user.uid}/${file.name}`);
                     await uploadBytes(storageRef, file);
                     profilePicUrl = await getDownloadURL(storageRef);
                 }
 
-                await setDoc(doc(db, 'users', user.email || ''), {
+                // Update data for room 201
+                await setDoc(doc(db, 'users201', user.email || ''), {
                     profilePicture: profilePicUrl,
                     roomNumber,
                     fullName,
-                    phoneNumber, // Save phone number
+                    phoneNumber,
                 });
                 alert('Profile updated successfully!');
             }
@@ -79,9 +81,9 @@ const ProfileSettingsPage: React.FC = () => {
 
     return (
         <>
-            <AppNavbar />
+            <AppNavbar201 />
             <div className="settings-container">
-                <h2>ตั้งค่าโปรไฟล์</h2>
+                <h2>ตั้งค่าโปรไฟล์ห้อง 201</h2>
                 <form onSubmit={handleSave}>
                     <div className="form-group">
                         <label htmlFor="profilePicture">รูปภาพโปรไฟล์ :</label>
@@ -119,4 +121,4 @@ const ProfileSettingsPage: React.FC = () => {
     );
 };
 
-export default ProfileSettingsPage;
+export default ProfileSettingsPage201;

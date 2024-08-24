@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
-import { auth, db } from '../firebaseConfig';
-import './RoomSettings.css';
+import { db } from '../firebaseConfig'; // Assuming db is your Firestore instance
+import './RoomSettings201.css'; // Ensure this CSS file exists and is styled as needed
 
-interface RoomSettingsProps {
+interface RoomSettings201Props {
     rentalAgreement: string;
     rentAmount: number;
     electricityRate: number;
     waterRate: number;
 }
 
-const RoomSettings: React.FC<RoomSettingsProps> = ({
+const RoomSettings201: React.FC<RoomSettings201Props> = ({
     rentalAgreement: defaultRentalAgreement,
     rentAmount: defaultRentAmount,
     electricityRate: defaultElectricityRate,
@@ -25,27 +25,20 @@ const RoomSettings: React.FC<RoomSettingsProps> = ({
 
     useEffect(() => {
         const fetchRoomData = async () => {
-            const user = auth.currentUser;
-
-            if (user) {
-                try {
-                    const userDoc = await getDoc(doc(db, 'users', user.email || ''));
-                    if (userDoc.exists()) {
-                        const data = userDoc.data();
-                        setRentalAgreement(data?.rentalAgreement || defaultRentalAgreement);
-                        setRentAmount(data?.rentAmount || defaultRentAmount);
-                        setElectricityRate(data?.electricityRate || defaultElectricityRate);
-                        setWaterRate(data?.waterRate || defaultWaterRate);
-                    } else {
-                        setError('ไม่พบข้อมูลห้องพัก');
-                    }
-                } catch (err) {
-                    setError('ไม่สามารถดึงข้อมูลห้องพักได้');
-                } finally {
-                    setLoading(false);
+            try {
+                const userDoc = await getDoc(doc(db, 'users201', '201@room.com')); // Placeholder or real email
+                if (userDoc.exists()) {
+                    const data = userDoc.data();
+                    setRentalAgreement(data?.rentalAgreement || defaultRentalAgreement);
+                    setRentAmount(data?.rentAmount || defaultRentAmount);
+                    setElectricityRate(data?.electricityRate || defaultElectricityRate);
+                    setWaterRate(data?.waterRate || defaultWaterRate);
+                } else {
+                    setError('ไม่พบข้อมูลห้องพัก');
                 }
-            } else {
-                setError('ไม่มีผู้ใช้เข้าสู่ระบบ');
+            } catch (err) {
+                setError('ไม่สามารถดึงข้อมูลห้องพักได้');
+            } finally {
                 setLoading(false);
             }
         };
@@ -54,32 +47,26 @@ const RoomSettings: React.FC<RoomSettingsProps> = ({
     }, [defaultRentalAgreement, defaultRentAmount, defaultElectricityRate, defaultWaterRate]);
 
     const handleSave = async () => {
-        const user = auth.currentUser;
-
-        if (user) {
-            try {
-                const userRef = doc(db, 'users', user.email || '');
-                await updateDoc(userRef, {
-                    rentalAgreement,
-                    rentAmount,
-                    electricityRate,
-                    waterRate,
-                });
-                alert('อัปเดตข้อมูลสำเร็จ');
-            } catch (err) {
-                setError('ไม่สามารถอัปเดตข้อมูลได้');
-            }
-        } else {
-            setError('ไม่มีผู้ใช้เข้าสู่ระบบ');
+        try {
+            const userRef = doc(db, 'users201', '201@room.com'); // Placeholder or real email
+            await updateDoc(userRef, {
+                rentalAgreement,
+                rentAmount,
+                electricityRate,
+                waterRate,
+            });
+            alert('อัปเดตข้อมูลสำเร็จ');
+        } catch (err) {
+            setError('ไม่สามารถอัปเดตข้อมูลได้');
         }
     };
 
     if (loading) {
-        return <div className="loading">กำลังโหลดข้อมูล...</div>; // Apply loading styles
+        return <div className="loading">กำลังโหลดข้อมูล...</div>;
     }
 
     if (error) {
-        return <p className="error">{error}</p>; // Apply error styles
+        return <p className="error">{error}</p>;
     }
 
     return (
@@ -95,7 +82,7 @@ const RoomSettings: React.FC<RoomSettingsProps> = ({
                                 type="number"
                                 value={rentAmount}
                                 onChange={(e) => setRentAmount(Number(e.target.value))}
-                                min="0" // Add validation
+                                min="0"
                             /> บาท
                         </td>
                     </tr>
@@ -106,7 +93,7 @@ const RoomSettings: React.FC<RoomSettingsProps> = ({
                                 id="rentalAgreement"
                                 type="text"
                                 value={rentalAgreement}
-                                onChange={(e) => setRentalAgreement(e.target.value)}
+                                onChange={(e) => setRentalAgreement(e.target.value)} // Corrected parentheses
                             />
                         </td>
                     </tr>
@@ -118,7 +105,7 @@ const RoomSettings: React.FC<RoomSettingsProps> = ({
                                 type="number"
                                 value={electricityRate}
                                 onChange={(e) => setElectricityRate(Number(e.target.value))}
-                                min="0" // Add validation
+                                min="0"
                             /> บาท/ยูนิต
                         </td>
                     </tr>
@@ -130,7 +117,7 @@ const RoomSettings: React.FC<RoomSettingsProps> = ({
                                 type="number"
                                 value={waterRate}
                                 onChange={(e) => setWaterRate(Number(e.target.value))}
-                                min="0" // Add validation
+                                min="0"
                             /> บาท/เดือน
                         </td>
                     </tr>
@@ -141,4 +128,4 @@ const RoomSettings: React.FC<RoomSettingsProps> = ({
     );
 };
 
-export default RoomSettings;
+export default RoomSettings201;
