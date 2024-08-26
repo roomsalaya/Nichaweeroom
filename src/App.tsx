@@ -46,10 +46,9 @@ const App: React.FC = () => {
                         />
                         <Route path='/electricityrate' element={<ElectricityRate />} />
                         <Route path='/showelectricity' element={<Showelectricity />} />
-                        <Route path="/rentalinvoiceaccordion" element={<RentalInvoiceAccordion />} />
                         <Route path='/invoicepage' element={<InvoicePage />} /> {/* Correct the typo here */}
-                        <Route path='/roomprice' element={<Roomprice/>} />
-                        <Route path='/waterbill' element={<WaterBill/>}/>
+                        <Route path='/roomprice' element={<Roomprice />} />
+                        <Route path='/waterbill' element={<WaterBill />} />
 
                         {/* user201 */}
                         <Route path='/userprofile201' element={<UserProfile201 />} />
@@ -59,6 +58,7 @@ const App: React.FC = () => {
                             rentAmount={rentAmount}
                             electricityRate={electricityRate}
                             waterRate={waterRate} />} />
+                        <Route path="/rentalinvoiceaccordion" element={<RentalInvoiceAccordion />} />
                     </Routes>
                 </div>
             </div>
